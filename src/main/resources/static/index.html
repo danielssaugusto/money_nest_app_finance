@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppFinance | Dashboard Financeiro Profissional</title>
+    <meta name="description" content="Gestão financeira moderna e intuitiva para o seu dia a dia.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2845/2845812.png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-wallet"></i>
+                    <h1>AppFinance</h1>
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link active">Dashboard</a>
+                    <a href="history.html" class="nav-link">Histórico Mensal</a>
+                </nav>
+                <div class="user-profile">
+                    <div class="welcome">
+                        <span>Olá,</span>
+                        <strong id="user-display-name">Usuário</strong>
+                    </div>
+                    <div class="avatar" id="user-avatar">U</div>
+                    <button id="theme-toggle" class="theme-toggle" title="Alternar Tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Summary Dashboard -->
+            <section class="dashboard">
+                <div class="card balance-card">
+                    <div class="balance-info-row">
+                        <span class="label">Saldo Total</span>
+                    </div>
+                    <div class="amount-container">
+                        <i class="fas fa-wallet"></i>
+                        <p class="amount" id="total-balance">R$ 0,00</p>
+                        <button class="toggle-balance" id="toggle-balance" title="Ocultar/Mostrar Saldo">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="card-footer">
+                        <span>Atualizado agora</span>
+                    </div>
+                </div>
+                <div class="card income-card">
+                    <div class="card-header">
+                        <h3>Entradas</h3>
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-down" style="color: var(--success);"></i>
+                            <p class="amount" id="total-income">R$ 0,00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card expense-card">
+                    <div class="card-header">
+                        <h3>Saídas</h3>
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-up" style="color: var(--error)"></i>
+                            <p class="amount" id="total-expenses">R$ 0,00</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="insights-grid">
+                <div class="card insights-card">
+                    <div class="card-header">
+                        <h3>Economia Mensal</h3>
+                        <span id="savings-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="savings-progress" class="progress-fill"></div>
+                    </div>
+                    <p class="insight-text">Você economizou <strong id="savings-amount">R$ 0,00</strong> este mês.</p>
+                </div>
+
+                <div class="card distribution-card">
+                    <div class="card-header">
+                        <h3>Distribuição por Conta</h3>
+                        <i class="fas fa-wallet" style="color: var(--accent)"></i>
+                    </div>
+                    <div id="account-distribution" class="distribution-list">
+                        <!-- Items added by app.js -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="actions-bar">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Buscar transação...">
+                </div>
+                <div class="filters">
+                    <select id="filter-type">
+                        <option value="all">Todos os tipos</option>
+                        <option value="income">Entradas</option>
+                        <option value="expense">Saídas</option>
+                    </select>
+                    <button id="open-modal" class="btn-primary">
+                        <i class="fas fa-plus"></i> Nova Transação
+                    </button>
+                </div>
+            </section>
+
+            <!-- Transactions List -->
+            <section class="transactions">
+                <div class="section-header">
+                    <h2>Transações Recentes</h2>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Banco</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th style="text-align: right;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-body">
+                            <!-- Rows will be added by app.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for adding transactions -->
+    <div id="transaction-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nova Transação</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="transaction-form">
+                <input type="hidden" id="transaction-id">
+                <div class="form-group">
+                    <label for="amount">Valor (R$)</label>
+                    <input type="number" id="amount" step="0.01" required placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label for="description">Descrição</label>
+                    <input type="text" id="description" required placeholder="Ex: Salário, Aluguel...">
+                </div>
+                <div class="form-group">
+                    <label for="bank">Banco / Conta</label>
+                    <select id="bank" required>
+                        <option value="" disabled selected>Selecione uma conta...</option>
+                        <option value="Nubank - Carteira">Nubank - Carteira</option>
+                        <option value="Nubank - Conta Corrente">Nubank - Conta Corrente</option>
+                        <option value="Itaú - Corrente">Itaú - Corrente</option>
+                        <option value="Bradesco - Poupança">Bradesco - Poupança</option>
+                        <option value="Santander - Corrente">Santander - Corrente</option>
+                        <option value="Banco do Brasil - Corrente">Banco do Brasil - Corrente</option>
+                        <option value="Inter - Investimentos">Inter - Investimentos</option>
+                        <option value="Dinheiro - Espécie">Dinheiro - Espécie</option>
+                        <option value="XP - Investimentos">XP - Investimentos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="type">Tipo</label>
+                    <select id="type" required>
+                        <option value="INCOME">Entrada</option>
+                        <option value="EXPENSE">Saída</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">Salvar Transação</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

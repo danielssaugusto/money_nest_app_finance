@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppFinance | Histórico Mensal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-wallet"></i>
+                    <h1>AppFinance</h1>
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link">Dashboard</a>
+                    <a href="history.html" class="nav-link active">Histórico Mensal</a>
+                </nav>
+                <div class="user-profile">
+                    <div class="welcome">
+                        <span>Olá,</span>
+                        <strong id="user-display-name">Usuário</strong>
+                    </div>
+                    <div class="avatar" id="user-avatar">U</div>
+                    <button id="theme-toggle" class="theme-toggle" title="Alternar Tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Stats Dashboard Section -->
+            <section class="stats-summary-grid">
+                <div class="stat-card balance-card">
+                    <div class="balance-info-row">
+                        <span class="label">Saldo Mensal</span>
+                    </div>
+                    <div class="amount-container">
+                        <i class="fas fa-wallet"></i>
+                        <span id="month-total" class="value">R$ 0,00</span>
+                        <button class="toggle-balance" id="toggle-balance" title="Ocultar/Mostrar Saldo">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card income-card">
+                    <div class="card-header">
+                        <h3>Entradas</h3>
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-down" style="color: var(--success);"></i>
+                            <p class="amount" id="total-income">R$ 0,00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card expense-card">
+                    <div class="card-header">
+                        <h3>Saídas</h3>
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-up" style="color: var(--error)"></i>
+                            <p class="amount" id="total-expenses">R$ 0,00</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filters & Controls Section -->
+            <section class="history-controls">
+                <div class="toolbar-content">
+                    <div class="filter-group">
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="month" id="history-month">
+                        </div>
+                        <div class="input-with-icon search-main">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="search-desc" placeholder="Buscar por descrição, banco ou valor...">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="input-with-icon">
+                            <i class="fas fa-university"></i>
+                            <select id="filter-bank">
+                                <option value="">Todos os Bancos</option>
+                            </select>
+                        </div>
+                        <div class="input-with-icon">
+                            <i class="fas fa-filter"></i>
+                            <select id="filter-type">
+                                <option value="">Todos os Tipos</option>
+                                <option value="INCOME">Entradas</option>
+                                <option value="EXPENSE">Saídas</option>
+                            </select>
+                        </div>
+                        <button class="btn-export" onclick="exportToCSV()" title="Exportar CSV">
+                            <i class="fas fa-file-export"></i>
+                            <span>Exportar</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="results-count" class="results-count">Exibindo 0 transações</div>
+            </section>
+
+            <!-- List Section -->
+            <section class="transactions-list-section">
+                <div class="section-title">
+                    <h2>Detalhamento do Período</h2>
+                    <span class="subtitle" id="results-count">Exibindo todas as transações</span>
+                </div>
+                <div class="history-statement glass">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Banco</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body">
+                            <!-- Rows injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="history.js"></script>
+</body>
+
+</html>
