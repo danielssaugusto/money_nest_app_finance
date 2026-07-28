@@ -19,4 +19,4 @@ Para entender a arquitetura, funções do código e detalhes técnicos, consulte
 *   **Filtros Avançados**: Busca em tempo real.
 
 ---
-*Projeto desenvolvido para fins de gestão financeira profissional.*
+*Projeto desenvolvido para fins de gestão financeira pessoal.*
