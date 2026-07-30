@@ -1,23 +1,27 @@
-# MoneyNest - App Finance
+# MoneyNest - Personal Finance Manager
 
-Sistema de gestão financeira pessoal construído com **Spring Boot** e **Vanilla JavaScript**.
+A personal finance management application built with **Spring Boot** and **Vanilla JavaScript**.
 
-##  Início Rápido
-1.  Configure seu banco PostgreSQL em `application.properties`.
-2.  Execute `MoneyNestApplication.java`.
-3.  Acesse `http://localhost:8081`.
+## Quick Start
 
-##  Documentação Detalhada
-Para entender a arquitetura, funções do código e detalhes técnicos, consulte o arquivo:<br><br>
-&emsp;&emsp;**[DOCUMENTATION.md](./DOCUMENTATION.md)** EN_US<br>
-&emsp;&emsp;**[DOCUMENTACAO.md](./DOCUMENTACAO.md)** PT_BR
+1. Configure your PostgreSQL database in `application.properties`.
+2. Run `MoneyNestApplication.java`.
+3. Open `http://localhost:8081` in your browser.
 
-## Funcionalidades Principais
-*   **Dashboard Inteligente**: Saldo, Entradas e Saídas.
-*   **Modo Escuro**: Interface adaptável para qualquer ambiente.
-*   **Privacidade**: Oculte seus saldos com um clique.
-*   **Histórico Mensal**: Consulta detalhada por mês/ano.
-*   **Filtros Avançados**: Busca em tempo real.
+## Documentation
+
+For a detailed overview of the project architecture, code structure, business logic, and technical implementation, see:
+
+- **[DOCUMENTATION.md](./DOCUMENTATION.md)** – English (EN)
+- **[DOCUMENTACAO.md](./DOCUMENTACAO.md)** – Portuguese (PT-BR)
+
+## Key Features
+
+- **Financial Dashboard** – Track your balance, income, and expenses.
+- **Dark Mode** – Switch between light and dark themes.
+- **Privacy Mode** – Hide your financial information with a single click.
+- **Monthly History** – Browse transactions by month and year.
+- **Real-Time Search** – Instantly filter transactions as you type.
 
 ---
-*Projeto desenvolvido para fins de gestão financeira pessoal.*
+*This project was developed for personal finance management purposes.*
