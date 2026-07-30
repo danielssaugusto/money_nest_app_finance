@@ -5,8 +5,11 @@ A personal finance management application built with **Spring Boot** and **Vanil
 ## Quick Start
 
 1. Configure your PostgreSQL database in `application.properties`.
-2. Run `MoneyNestApplication.java`.
-3. Open `http://localhost:8081` in your browser.
+2. Configure your secret information in .env
+3. com base no .env.example crie um arquivo novo .env
+4. gere uma chave secreta valida, você pode usar o comando: openssl rand -base64 64
+5. Run mvn spring-boot:run
+7. Open `http://localhost:8081` in your browser.
 
 ## Documentation
 
