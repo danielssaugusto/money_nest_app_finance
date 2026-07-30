@@ -92,25 +92,197 @@ A comunicação é feita via **JSON (JavaScript Object Notation)** através de c
 
 ---
 
-## Como Rodar a Aplicação
+# Guia de Configuração do Projeto
 
-### Pré-requisitos
-*   **Java 21 ou superior** instalado.
-*   **PostgreSQL** instalado e rodando.
-*   **IntelliJ IDEA** (ou sua IDE de preferência).
+## Pré-requisitos
 
-### Passo a Passo
-1.  **Configurar o Banco de Dados**:
-    *   Crie um banco de dados chamado `appfinance` no seu PostgreSQL.
-    *   Acesse `src/main/resources/application.properties` e verifique se as credenciais (`username` e `password`) e a porta (`5434`) estão corretas.
-2.  **Compilar o Projeto**:
-    *   No IntelliJ, aguarde o Maven baixar as dependências.
-    *   Execute o comando `mvn clean install` se estiver via terminal.
-3.  **Iniciar a Aplicação**:
-    *   Execute a classe `AppFinanceApplication.java`.
-    *   O console deve mostrar: `Started AppFinanceApplication in ... seconds (JVM running on port 8081)`.
-4.  **Acessar o Sistema**:
-    *   Abra o navegador e acesse: **`http://localhost:8081`**
+Antes de executar a aplicação, certifique-se de que os seguintes requisitos estão instalados e configurados:
+
+- Java Development Kit (JDK)
+- Apache Maven
+- Banco de dados PostgreSQL
+
+Certifique-se de que o PostgreSQL está em execução e que o banco de dados necessário já foi criado.
+
+---
+
+# Configuração da Aplicação
+
+## 1. Configurar o Banco de Dados PostgreSQL
+
+Configure a conexão com o banco PostgreSQL no arquivo:
+
+```text
+src/main/resources/application.properties
+```
+
+Atualize as propriedades do banco de acordo com o seu ambiente local.
+
+Exemplo:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/seu_banco
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+Substitua:
+
+- `seu_banco` pelo nome do seu banco PostgreSQL.
+- `seu_usuario` pelo usuário do PostgreSQL.
+- `sua_senha` pela senha do PostgreSQL.
+
+---
+
+## 2. Configurar as Variáveis de Ambiente
+
+O projeto utiliza variáveis de ambiente para armazenar informações sensíveis.
+
+Primeiro, utilize o arquivo de exemplo como referência:
+
+```bash
+.env.example
+```
+
+Crie um novo arquivo `.env` na raiz do projeto:
+
+```bash
+touch .env
+```
+
+Copie as variáveis necessárias do arquivo `.env.example` para o arquivo `.env` e atualize os valores de acordo com o seu ambiente.
+
+Exemplo:
+
+```env
+JWT_SECRET=sua_chave_secreta_gerada
+```
+
+> Nunca envie o arquivo `.env` para o controle de versão.
+
+Certifique-se de que o arquivo `.env` está incluído no `.gitignore`:
+
+```gitignore
+.env
+```
+
+---
+
+## 3. Gerar a Chave Secreta JWT
+
+A aplicação utiliza uma chave secreta JWT para autenticação e geração de tokens.
+
+Gere uma chave segura utilizando o comando:
+
+```bash
+openssl rand -base64 64
+```
+
+Exemplo de saída:
+
+```text
+a8Jk92kLmX7sQ2pW9fL0zYx3vR8mN4cB6dE1sT5uP9qW7xZ2
+```
+
+Copie o valor gerado e adicione ao arquivo `.env`:
+
+```env
+JWT_SECRET=a8Jk92kLmX7sQ2pW9fL0zYx3vR8mN4cB6dE1sT5uP9qW7xZ2
+```
+
+---
+
+# Executando a Aplicação
+
+## 4. Iniciar a Aplicação
+
+Execute a aplicação utilizando Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+Aguarde até que a aplicação seja inicializada corretamente.
+
+Exemplo de saída esperada:
+
+```text
+Started Application in X seconds
+```
+
+---
+
+# Acessando a Aplicação
+
+## 5. Abrir no Navegador
+
+Após a aplicação iniciar, abra o navegador e acesse:
+
+```text
+http://localhost:8081
+```
+
+A aplicação estará disponível localmente.
+
+---
+
+# Solução de Problemas
+
+## Problemas de Conexão com PostgreSQL
+
+Verifique se o PostgreSQL está em execução:
+
+```bash
+sudo systemctl status postgresql
+```
+
+Verifique os clusters ativos do PostgreSQL:
+
+```bash
+pg_lsclusters
+```
+
+Saída esperada:
+
+```text
+Ver Cluster Port Status Owner
+17  main    5432 online postgres
+```
+
+Teste a conexão com o PostgreSQL:
+
+```bash
+psql -h localhost -p 5432 -U seu_usuario -d seu_banco
+```
+
+---
+
+## Porta Já Está em Uso
+
+Verifique qual processo está utilizando a porta `8081`:
+
+```bash
+ss -ltnp | grep 8081
+```
+
+Finalize o processo conflitante ou altere a porta da aplicação.
+
+---
+
+# Fluxo de Desenvolvimento
+
+1. Clone o repositório.
+2. Configure o PostgreSQL.
+3. Crie o arquivo `.env`.
+4. Gere a chave secreta JWT.
+5. Configure o arquivo `application.properties`.
+6. Inicie a aplicação com Maven.
+7. Acesse a aplicação pelo navegador.
+
+
 
 ---
 
