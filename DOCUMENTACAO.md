@@ -1,11 +1,11 @@
-# 🏦 AppFinance - Sistema de Gestão Financeira Profissional
+# MoneyNest AppFinance - Sistema de Gestão Financeira Pessoal
 
-## 📋 Proposta do Projeto
-O **AppFinance** é uma aplicação moderna de gestão financeira pessoal projetada para oferecer uma experiência intuitiva e profissional. O objetivo é permitir que os usuários monitorem seu saldo total, entradas (receitas) e saídas (despesas) de forma rápida, com uma interface inspirada nos principais aplicativos de fintech do mercado (como Nubank e Uber).
+## Proposta do Projeto
+O **MoneyNest** é uma aplicação de gestão financeira pessoal projetada para oferecer uma experiência intuitiva. O objetivo é permitir que os usuários monitorem seu saldo total, entradas (receitas) e saídas (despesas) de forma rápida, com uma interface inspirada nos principais aplicativos de fintech do mercado (como Nubank e Uber).
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+## Arquitetura do Sistema
 
 A aplicação segue o padrão de **Arquitetura em Camadas** (N-Tier Architecture), separando claramente as responsabilidades entre o Backend (Servidor) e o Frontend (Cliente).
 
@@ -26,7 +26,7 @@ graph LR
 
 ---
 
-## 💻 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend
 *   **Java 25**: Linguagem principal (rodando em modo de compatibilidade Java 21).
@@ -43,7 +43,7 @@ graph LR
 
 ---
 
-## 📂 Estrutura e Funções do Código
+## Estrutura e Funções do Código
 
 ### 1. Backend (Java)
 
@@ -82,7 +82,7 @@ Define como os dados são salvos no banco. Campos: `id`, `amount`, `description`
 
 ---
 
-## 🔗 Conexão Backend x Frontend
+## Conexão Backend x Frontend
 
 A comunicação é feita via **JSON (JavaScript Object Notation)** através de chamadas HTTP:
 
@@ -92,7 +92,7 @@ A comunicação é feita via **JSON (JavaScript Object Notation)** através de c
 
 ---
 
-## 🚀 Como Rodar a Aplicação
+## Como Rodar a Aplicação
 
 ### Pré-requisitos
 *   **Java 21 ou superior** instalado.
@@ -114,7 +114,7 @@ A comunicação é feita via **JSON (JavaScript Object Notation)** através de c
 
 ---
 
-## 🛠️ Funções Avançadas Incluídas
+## Funções Avançadas Incluídas
 *   **Busca em Tempo Real**: Filtre transações enquanto digita.
 *   **Ocultar Saldo**: Privacidade com o ícone de "olho".
 *   **Histórico Mensal**: Página dedicada para consultar meses específicos.
