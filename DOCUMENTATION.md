@@ -133,62 +133,197 @@ The application uses **REST APIs** with **JSON** for communication.
 
 ---
 
-# Getting Started
+# Project Setup Guide
 
 ## Prerequisites
 
-- Java 21 or later
-- PostgreSQL
-- Maven
-- IntelliJ IDEA (or another Java IDE)
+Before running the application, make sure you have the following installed and configured:
+
+- Java Development Kit (JDK)
+- Apache Maven
+- PostgreSQL Database
+
+Ensure that PostgreSQL is running and that the required database has been created.
 
 ---
 
-## Installation
+# Application Configuration
 
-### 1. Configure the Database
+## 1. Configure PostgreSQL Database
 
-Create a PostgreSQL database named:
-
-```text
-appfinance
-```
-
-Edit the following file:
+Configure your PostgreSQL database connection in:
 
 ```text
 src/main/resources/application.properties
 ```
 
-Update:
+Update the database properties according to your local environment.
 
-- Database username
-- Database password
-- Database port (default: `5434`)
+Example:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/your_database
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+Replace:
+
+- `your_database` with your PostgreSQL database name.
+- `your_username` with your PostgreSQL username.
+- `your_password` with your PostgreSQL password.
 
 ---
 
-### 2. Build the Project
+## 2. Configure Environment Variables
+
+The project uses environment variables to store sensitive information.
+
+First, use the example file as a reference:
 
 ```bash
-mvn clean install
+.env.example
+```
+
+Create a new `.env` file in the project root directory:
+
+```bash
+touch .env
+```
+
+Copy the required variables from `.env.example` into `.env` and update the values according to your environment.
+
+Example:
+
+```env
+JWT_SECRET=your_generated_secret_key
+```
+
+> Do not commit the `.env` file to version control.
+
+Make sure `.env` is included in `.gitignore`:
+
+```gitignore
+.env
 ```
 
 ---
 
-### 3. Run the Application
+## 3. Generate JWT Secret Key
 
-Run:
+The application requires a secure JWT secret key for token authentication.
 
-```text
-AppFinanceApplication.java
+Generate a valid secret key using:
+
+```bash
+openssl rand -base64 64
 ```
 
-The application will start on:
+Example output:
+
+```text
+a8Jk92kLmX7sQ2pW9fL0zYx3vR8mN4cB6dE1sT5uP9qW7xZ2
+```
+
+Add the generated value to your `.env` file:
+
+```env
+JWT_SECRET=a8Jk92kLmX7sQ2pW9fL0zYx3vR8mN4cB6dE1sT5uP9qW7xZ2
+```
+
+---
+
+# Running the Application
+
+## 4. Start the Application
+
+Run the application using Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+Wait until the application finishes starting successfully.
+
+Example output:
+
+```text
+Started Application in X seconds
+```
+
+---
+
+# Accessing the Application
+
+## 5. Open in Browser
+
+After the application starts, open your browser and access:
 
 ```text
 http://localhost:8081
 ```
+
+The application should now be available locally.
+
+---
+
+# Troubleshooting
+
+## PostgreSQL Connection Issues
+
+Check if PostgreSQL is running:
+
+```bash
+sudo systemctl status postgresql
+```
+
+Check active PostgreSQL clusters:
+
+```bash
+pg_lsclusters
+```
+
+Expected output:
+
+```text
+Ver Cluster Port Status Owner
+17  main    5432 online postgres
+```
+
+Test PostgreSQL connection:
+
+```bash
+psql -h localhost -p 5432 -U your_username -d your_database
+```
+
+---
+
+## Port Already in Use
+
+Check which process is using port `8081`:
+
+```bash
+ss -ltnp | grep 8081
+```
+
+Stop the conflicting process or configure another application port.
+
+---
+
+# Development Workflow
+
+1. Clone the repository.
+2. Configure PostgreSQL.
+3. Create the `.env` file.
+4. Generate the JWT secret.
+5. Configure application properties.
+6. Start the application with Maven.
+7. Access the application through the browser.
+
+
 
 ---
 
