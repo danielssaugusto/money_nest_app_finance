@@ -4,12 +4,29 @@ A personal finance management application built with **Spring Boot** and **Vanil
 
 ## Quick Start
 
-1. Configure your PostgreSQL database in `application.properties`.
-2. Configure your secret information in .env
-3. com base no .env.example crie um arquivo novo .env
-4. gere uma chave secreta valida, você pode usar o comando: openssl rand -base64 64
-5. Run mvn spring-boot:run
-7. Open `http://localhost:8081` in your browser.
+1. Configure your PostgreSQL database settings in `application.properties`.
+
+2. Use the `.env.example` file as a reference and create a new `.env` file in the project root directory.
+
+3. Configure your secret information and required environment variables in the `.env` file.
+
+4. Generate a valid secret key for JWT authentication. You can use the following command:
+
+    ````bash
+    openssl rand -base64 64
+    ````
+5. Run the application:
+
+    ````bash
+    mvn spring-boot:run
+    ````
+6. Open the application in your browser:
+
+    ````text
+    http://localhost:8081
+    ````
+For more information, configuration details, or any questions, please refer to the project documentation.
+
 
 ## Documentation
 
